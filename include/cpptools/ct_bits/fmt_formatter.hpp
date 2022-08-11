@@ -4,6 +4,7 @@
 #include <fmt/ostream.h>
 #include <ostream>
 #include <type_traits>
+#include <vector>
 
 template <typename T>
 typename std::enable_if<std::is_enum<T>::value, std::ostream&>::type operator<<(std::ostream& os, const T& value)

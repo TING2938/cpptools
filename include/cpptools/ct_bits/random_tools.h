@@ -45,7 +45,7 @@ int randd(int low = 0, int up = 10)
  *             If empty, the sample assumes a uniform distribution over all entries in a
  * @return int
  */
-template <typename T>
+template <typename T = double>
 int random_choise(int a, const std::vector<T>& prob = {})
 {
     if (prob.empty()) {
@@ -72,7 +72,7 @@ int random_choise(int a, const std::vector<T>& prob = {})
  *             If empty, the sample assumes a uniform distribution over all entries in a
  * @return T
  */
-template <typename T, typename P>
+template <typename T, typename P = double>
 T random_choise(const std::vector<T>& a, const std::vector<P>& prob = {})
 {
     return a[random_choise(a.size(), prob)];
@@ -88,7 +88,7 @@ T random_choise(const std::vector<T>& a, const std::vector<P>& prob = {})
  *             If empty, the sample assumes a uniform distribution over all entries in a
  * @return std::vector<T>
  */
-template <typename T, typename P>
+template <typename T, typename P = double>
 std::vector<T> random_choise(const std::vector<T>& a, int size, const std::vector<P>& prob = {})
 {
     std::vector<T> ret(size);
@@ -107,7 +107,7 @@ std::vector<T> random_choise(const std::vector<T>& a, int size, const std::vecto
  *             If empty, the sample assumes a uniform distribution over all entries in a
  * @return Veci
  */
-template <typename P>
+template <typename P = double>
 std::vector<int> random_choise(int a, int size, const std::vector<P>& prob = {})
 {
     std::vector<int> ret(size);
