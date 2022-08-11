@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.11)
 
 project(cpptools)
 
@@ -43,44 +43,16 @@ add_library(cpptools::pybind11 ALIAS ct_pybind11)
 add_library(cpptools::gitinfo ALIAS ct_gitinfo)
 add_library(cpptools::all ALIAS ct_all)
 
-# fmt
-add_subdirectory(third_party/fmt)
-target_link_libraries(ct_fmt INTERFACE fmt::fmt-header-only)
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/fetch_lib.cmake)
 
-# basic
+target_link_libraries(ct_fmt INTERFACE fmt::fmt-header-only)
 target_include_directories(ct_ct INTERFACE ${CMAKE_CURRENT_LIST_DIR}/include)
 target_link_libraries(ct_ct INTERFACE ct_fmt)
-
-# spdlog
-set(SPDLOG_FMT_EXTERNAL_HO ON CACHE BOOL "") # use external fmt library
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/third_party/spdlog)
 target_link_libraries(ct_spdlog INTERFACE spdlog::spdlog_header_only)
-
-# eigen
-set(EIGEN_BUILD_DOC OFF CACHE BOOL "")
-set(BUILD_TESTING OFF CACHE BOOL "")
-set(EIGEN_BUILD_PKGCONFIG OFF CACHE BOOL "")
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/third_party/eigen)
 target_link_libraries(ct_eigen INTERFACE Eigen3::Eigen)
-
-# pybind11
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/third_party/pybind11)
 target_link_libraries(ct_pybind11 INTERFACE pybind11::embed)
-
-# json
-set(JSON_BuildTests OFF CACHE INTERNAL "")
-set(JSON_Install OFF CACHE INTERNAL "")
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/third_party/json)
 target_link_libraries(ct_json INTERFACE nlohmann_json::nlohmann_json)
-
-# gtest
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
-set(BUILD_GTEST ON CACHE BOOL "" FORCE)
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/third_party/googletest)
 target_link_libraries(ct_gtest INTERFACE gtest gtest_main)
-
-# git info
 include(${CMAKE_CURRENT_LIST_DIR}/cmake/git_info.cmake)
 target_link_libraries(ct_gitinfo INTERFACE git_info)
 
