@@ -23,6 +23,12 @@ inline T sum(const std::vector<T>& vec)
     return std::accumulate(vec.begin(), vec.end(), T(0));
 }
 
+template <typename T, int N>
+inline T sum(const T (&vec)[N])
+{
+    return std::accumulate(std::begin(vec), std::end(vec), T(0));
+}
+
 /**
  * @brief the mean value of `vec`
  *
@@ -38,6 +44,14 @@ inline double mean(const std::vector<T>& vec)
     return double(sum(vec)) / double(vec.size());
 }
 
+template <typename T, int N>
+inline double mean(const T (&vec)[N])
+{
+    if (N == 0)
+        return 0.0;
+    return double(sum(vec)) / double(N);
+}
+
 /**
  * @brief the max value of `vec`
  *
@@ -49,6 +63,12 @@ template <typename T>
 inline T max(const std::vector<T>& vec)
 {
     return *std::max_element(vec.begin(), vec.end());
+}
+
+template <typename T, int N>
+inline T max(const T (&vec)[N])
+{
+    return *std::max_element(std::begin(vec), std::end(vec));
 }
 
 /**
@@ -64,6 +84,12 @@ inline std::ptrdiff_t argmax(const std::vector<T>& vec)
     return std::max_element(vec.begin(), vec.end()) - vec.begin();
 }
 
+template <typename T, int N>
+inline std::ptrdiff_t argmax(const T (&vec)[N])
+{
+    return std::max_element(std::begin(vec), std::end(vec)) - std::begin(vec);
+}
+
 /**
  * @brief the min value of `vec`
  *
@@ -77,6 +103,12 @@ inline T min(const std::vector<T>& vec)
     return *std::min_element(vec.begin(), vec.end());
 }
 
+template <typename T, int N>
+inline T min(const T (&vec)[N])
+{
+    return *std::min_element(std::begin(vec), std::end(vec));
+}
+
 /**
  * @brief the min position of `vec`
  *
@@ -88,6 +120,12 @@ template <typename T>
 inline std::ptrdiff_t argmin(const std::vector<T>& vec)
 {
     return std::min_element(vec.begin(), vec.end()) - vec.begin();
+}
+
+template <typename T, int N>
+inline std::ptrdiff_t argmin(const T (&vec)[N])
+{
+    return std::min_element(std::begin(vec), std::end(vec)) - std::begin(vec);
 }
 
 /**
@@ -109,6 +147,18 @@ inline double stddev(const std::vector<T>& vec)
     return std::sqrt(variance);
 }
 
+template <typename T, int N>
+inline double stddev(const T (&vec)[N])
+{
+    auto mean       = ct::mean(vec);
+    double variance = 0.0;
+    for (auto v : vec) {
+        variance += std::pow(v - mean, 2);
+    }
+    variance /= N;
+    return std::sqrt(variance);
+}
+
 /**
  * @brief calculate vec[0] * vec[1] * vec[2] * ...
  *
@@ -120,6 +170,12 @@ template <typename T>
 inline T prod(const std::vector<T>& vec)
 {
     return std::accumulate(vec.begin(), vec.end(), T(1), std::multiplies<T>());
+}
+
+template <typename T, int N>
+inline T prod(const T (&vec)[N])
+{
+    return std::accumulate(std::begin(vec), std::end(vec), T(1), std::multiplies<T>());
 }
 
 /**
