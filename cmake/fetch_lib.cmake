@@ -4,8 +4,7 @@ include(FetchContent)
 message(STATUS "cpptools fetch lib fmt")
 FetchContent_Declare(
     tag_fmt
-    GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-    GIT_TAG 8.1.1
+    URL https://github.com/fmtlib/fmt/releases/download/8.1.1/fmt-8.1.1.zip
 )
 FetchContent_MakeAvailable(tag_fmt)
 
@@ -13,8 +12,7 @@ message(STATUS "cpptools fetch lib spdlog")
 set(SPDLOG_FMT_EXTERNAL_HO ON CACHE BOOL "") # use external fmt library
 FetchContent_Declare(
     tag_spdlog
-    GIT_REPOSITORY https://github.com/gabime/spdlog.git
-    GIT_TAG v1.10.0
+    URL https://github.com/gabime/spdlog/archive/refs/tags/v1.10.0.tar.gz
 )
 FetchContent_MakeAvailable(tag_spdlog)
 
@@ -24,16 +22,14 @@ set(BUILD_TESTING OFF CACHE BOOL "")
 set(EIGEN_BUILD_PKGCONFIG OFF CACHE BOOL "")
 FetchContent_Declare(
     tag_eigen
-    GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
-    GIT_TAG 3.4.0
+    URL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 )
 FetchContent_MakeAvailable(tag_eigen)
 
 message(STATUS "cpptools fetch lib pybind11")
 FetchContent_Declare(
     tag_pybind11
-    GIT_REPOSITORY https://github.com/pybind/pybind11.git
-    GIT_TAG v2.9.2
+    URL https://github.com/pybind/pybind11/archive/refs/tags/v2.10.0.tar.gz
 )
 FetchContent_MakeAvailable(tag_pybind11)
 
@@ -42,8 +38,7 @@ set(JSON_BuildTests OFF CACHE INTERNAL "")
 set(JSON_Install OFF CACHE INTERNAL "")
 FetchContent_Declare(
     tag_json
-    GIT_REPOSITORY https://github.com/nlohmann/json
-    GIT_TAG v3.11.1
+    URL https://github.com/nlohmann/json/releases/download/v3.11.1/json.tar.xz
 )
 FetchContent_MakeAvailable(tag_json)
 
@@ -53,8 +48,7 @@ set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
 set(BUILD_GTEST ON CACHE BOOL "" FORCE)
 FetchContent_Declare(
     tag_gtest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG release-1.12.0
+    URL https://github.com/google/googletest/archive/refs/tags/release-1.12.1.tar.gz
 )
 FetchContent_MakeAvailable(tag_gtest)
 
