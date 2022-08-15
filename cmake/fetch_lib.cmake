@@ -39,7 +39,8 @@ macro(CT_USE_EIGEN)
             set(EIGEN_BUILD_PKGCONFIG OFF CACHE BOOL "")
             FetchContent_Declare(
                 tag_eigen
-                URL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+                GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
+                GIT_TAG 3.4.0
             )
             FetchContent_MakeAvailable(tag_eigen)
         endif()
