@@ -16,7 +16,7 @@ TEST(ct_test, getopt_test)
     getopt.getArray(vec, "-vec", 0, false, "params: vec");
     getopt.finish();
 
-    ASSERT_EQ(a, 1);
-    ASSERT_DOUBLE_EQ(b, 1.2);
-    ASSERT_EQ(vec, (std::vector<int>{1, 2, 5}));
+    EXPECT_EQ(a, 1);
+    EXPECT_DOUBLE_EQ(b, 1.2);
+    EXPECT_EQ(vec, (std::vector<int>{1, 2, 5}));
 }

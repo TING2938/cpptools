@@ -3,5 +3,5 @@
 
 TEST(ct_test, basic_test)
 {
-    ASSERT_EQ(1, 1);
+    EXPECT_EQ(1, 1);
 }
