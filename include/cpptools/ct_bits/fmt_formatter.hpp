@@ -7,7 +7,7 @@
 #include <vector>
 
 template <typename T>
-typename std::enable_if<std::is_enum<T>::value, std::ostream&>::type operator<<(std::ostream& os, const T& value)
+inline typename std::enable_if<std::is_enum<T>::value, std::ostream&>::type operator<<(std::ostream& os, const T& value)
 {
     return os << static_cast<typename std::underlying_type<T>::type>(value);
 }

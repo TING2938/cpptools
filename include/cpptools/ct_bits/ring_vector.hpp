@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vector_tools.h"
+#include "vector_tools.hpp"
 
 namespace ct
 {

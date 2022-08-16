@@ -22,7 +22,7 @@
 namespace ct
 {
 // copy from https://www.cnblogs.com/tangxin-blog/p/6086425.html
-int32_t create_directory(const std::string& directoryPath)
+inline int32_t create_directory(const std::string& directoryPath)
 {
     uint32_t dirPathLen = directoryPath.length();
     if (dirPathLen > MAX_PATH_LEN) {

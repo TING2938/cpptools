@@ -1,14 +1,14 @@
 #pragma once
 
 #include <cassert>
-#include "vector_tools.h"
+#include "vector_tools.hpp"
 
 namespace ct
 {
 /**
  * @brief Set the rand seed
  */
-void set_rand_seed(unsigned int __seed = time(nullptr))
+inline void set_rand_seed(unsigned int __seed = time(nullptr))
 {
     srand(__seed);
 }
@@ -20,7 +20,7 @@ void set_rand_seed(unsigned int __seed = time(nullptr))
  * @param up
  * @return double
  */
-double randf(double low = 0.0, double up = 1.0)
+inline double randf(double low = 0.0, double up = 1.0)
 {
     return (double)rand() / ((double)RAND_MAX + 1) * (up - low) + low;
 }
@@ -32,7 +32,7 @@ double randf(double low = 0.0, double up = 1.0)
  * @param up
  * @return int
  */
-int randd(int low = 0, int up = 10)
+inline int randd(int low = 0, int up = 10)
 {
     return rand() % (up - low) + low;
 }
@@ -46,7 +46,7 @@ int randd(int low = 0, int up = 10)
  * @return int
  */
 template <typename T = double>
-int random_choise(int a, const std::vector<T>& prob = {})
+inline int random_choise(int a, const std::vector<T>& prob = {})
 {
     if (prob.empty()) {
         return randd(0, a);
@@ -73,7 +73,7 @@ int random_choise(int a, const std::vector<T>& prob = {})
  * @return T
  */
 template <typename T, typename P = double>
-T random_choise(const std::vector<T>& a, const std::vector<P>& prob = {})
+inline T random_choise(const std::vector<T>& a, const std::vector<P>& prob = {})
 {
     return a[random_choise(a.size(), prob)];
 }
@@ -89,7 +89,7 @@ T random_choise(const std::vector<T>& a, const std::vector<P>& prob = {})
  * @return std::vector<T>
  */
 template <typename T, typename P = double>
-std::vector<T> random_choise(const std::vector<T>& a, int size, const std::vector<P>& prob = {})
+inline std::vector<T> random_choise(const std::vector<T>& a, int size, const std::vector<P>& prob = {})
 {
     std::vector<T> ret(size);
     for (int i = 0; i < size; i++) {
@@ -108,7 +108,7 @@ std::vector<T> random_choise(const std::vector<T>& a, int size, const std::vecto
  * @return Veci
  */
 template <typename P = double>
-std::vector<int> random_choise(int a, int size, const std::vector<P>& prob = {})
+inline std::vector<int> random_choise(int a, int size, const std::vector<P>& prob = {})
 {
     std::vector<int> ret(size);
     for (int i = 0; i < size; i++) {

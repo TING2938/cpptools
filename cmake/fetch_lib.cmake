@@ -17,7 +17,9 @@ macro(CT_USE_SPDLOG)
     if(NOT TARGET cpptools::spdlog)
         if (NOT TARGET spdlog::spdlog_header_only)
             message(STATUS "cpptools fetch lib spdlog")
-            set(SPDLOG_FMT_EXTERNAL_HO ON CACHE BOOL "") # use external fmt library
+            if (TARGET fmt::fmt-header-only)
+                set(SPDLOG_FMT_EXTERNAL_HO ON CACHE BOOL "") # use external fmt library
+            endif()
             FetchContent_Declare(
                 tag_spdlog
                 URL https://github.com/gabime/spdlog/archive/refs/tags/v1.10.0.tar.gz

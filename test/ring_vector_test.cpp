@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include <vector>
+
 #include "cpptools/ct.hpp"
+#include "cpptools/ct_bits/ring_vector.hpp"
 
 TEST(ct_test, fmt_test)
 {
