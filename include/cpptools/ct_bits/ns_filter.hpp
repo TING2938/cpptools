@@ -5,8 +5,16 @@
 
 namespace ct
 {
+// https://blog.csdn.net/iceboy314159/article/details/106178469
 namespace ns_filter
 {
+
+/**
+ * @brief Simple Moving Average, SMA
+ *  y_{i} = (\sum_{j=i-n+1}^{i} x_{i}) / n
+ * @tparam T
+ * @tparam M
+ */
 template <typename T, int M>
 class SMA
 {
@@ -34,6 +42,10 @@ private:
     T _last_flt_value{0};
 };
 
+/**
+ * @brief Weighted Moving Average, WMA
+ * y_{i} = (nx_i + (n-1)x_{i-1} + ... + x_{i-n+1}) / (n + (n-1) + ... + 1)
+ */
 template <typename T, int M>
 class WMA
 {
@@ -66,6 +78,10 @@ private:
     std::list<T> _ls;
 };
 
+/**
+ * @brief Exponential Moving Average,EMA
+ *    y_{i} = (1 - alpha)y_{i-1} + alpha * x_{i}
+ */
 template <typename T>
 class EMA
 {
