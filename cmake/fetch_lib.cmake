@@ -41,7 +41,7 @@ macro(CT_USE_EIGEN)
             set(EIGEN_BUILD_PKGCONFIG OFF CACHE BOOL "")
             FetchContent_Declare(
                 tag_eigen
-                URL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+                URL https://github.com/TING2938/eigen-mirror/archive/refs/tags/3.4.0.tar.gz
             )
             FetchContent_MakeAvailable(tag_eigen)
         endif()
