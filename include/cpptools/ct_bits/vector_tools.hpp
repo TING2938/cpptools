@@ -10,6 +10,12 @@
 namespace ct
 {
 
+template <typename _Tp, typename _InputIterator>
+inline _Tp sum(_InputIterator __first, _InputIterator __last)
+{
+    return std::accumulate(__first, __last, (_Tp)(0));
+}
+
 /**
  * @brief the sum value of `vec`
  *
@@ -20,13 +26,27 @@ namespace ct
 template <typename T>
 inline T sum(const std::vector<T>& vec)
 {
-    return std::accumulate(vec.begin(), vec.end(), T(0));
+    return ct::sum<T>(vec.begin(), vec.end());
 }
 
 template <typename T, int N>
 inline T sum(const T (&vec)[N])
 {
-    return std::accumulate(std::begin(vec), std::end(vec), T(0));
+    return ct::sum<T>(vec, vec + N);
+}
+
+template <typename _InputIterator>
+inline double mean(_InputIterator __first, _InputIterator __last)
+{
+    int N    = 0;
+    double s = 0.0;
+    for (auto it = __first; it != __last; ++it) {
+        s += *it;
+        ++N;
+    }
+    if (N == 0)
+        return 0.0;
+    return s / N;
 }
 
 /**
@@ -39,17 +59,13 @@ inline T sum(const T (&vec)[N])
 template <typename T>
 inline double mean(const std::vector<T>& vec)
 {
-    if (vec.empty())
-        return 0.0;
-    return double(sum(vec)) / double(vec.size());
+    return ct::mean(vec.begin(), vec.end());
 }
 
 template <typename T, int N>
 inline double mean(const T (&vec)[N])
 {
-    if (N == 0)
-        return 0.0;
-    return double(sum(vec)) / double(N);
+    return ct::mean(vec, vec + N);
 }
 
 /**
@@ -128,6 +144,21 @@ inline std::ptrdiff_t argmin(const T (&vec)[N])
     return std::min_element(std::begin(vec), std::end(vec)) - std::begin(vec);
 }
 
+template <typename _InputIterator>
+inline double stddev(_InputIterator __first, _InputIterator __last)
+{
+    auto mean       = ct::mean(__first, __last);
+    double variance = 0.0;
+    int N           = 0;
+    for (auto it = __first; it != __last; ++it) {
+        variance += std::pow(*it - mean, 2);
+        ++N;
+    }
+    variance /= N;
+    return std::sqrt(variance);
+}
+
+
 /**
  * @brief stddev of vector
  *  stddev = \sqrt{\frac{1}{n} \sum_{i = 0}^{n} {(x_{i}-\bar{x})^{2}}}
@@ -138,25 +169,13 @@ inline std::ptrdiff_t argmin(const T (&vec)[N])
 template <typename T>
 inline double stddev(const std::vector<T>& vec)
 {
-    auto mean       = ct::mean(vec);
-    double variance = 0.0;
-    for (auto v : vec) {
-        variance += std::pow(v - mean, 2);
-    }
-    variance /= vec.size();
-    return std::sqrt(variance);
+    return ct::stddev(vec.begin(), vec.end());
 }
 
 template <typename T, int N>
 inline double stddev(const T (&vec)[N])
 {
-    auto mean       = ct::mean(vec);
-    double variance = 0.0;
-    for (auto v : vec) {
-        variance += std::pow(v - mean, 2);
-    }
-    variance /= N;
-    return std::sqrt(variance);
+    return ct::stddev(vec, vec + N);
 }
 
 /**

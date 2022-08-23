@@ -68,10 +68,11 @@ TEST(opt, vec_op_eq_scalar)
 
 TEST(stdarray, func)
 {
-    const std::vector<int> v1 = {2, 4, 1};
-    const std::vector<int> v2 = {3, 5, 7};
+    const std::vector<int> v1    = {2, 4, 1};
+    const std::vector<double> v2 = {3, 5, 7};
 
     EXPECT_EQ(ct::sum(v1), 7);
+    EXPECT_EQ(ct::sum(v2), 15);
     EXPECT_DOUBLE_EQ(ct::mean(v1), 7 / 3.0);
     EXPECT_EQ(ct::max(v1), 4);
     EXPECT_EQ(ct::min(v1), 1);
