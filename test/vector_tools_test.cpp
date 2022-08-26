@@ -1,6 +1,5 @@
+#include "cpptools/ct_bits/vector_tools.hpp"
 #include <gtest/gtest.h>
-#include <vector>
-#include "cpptools/ct.hpp"
 
 using namespace ct::opt;
 

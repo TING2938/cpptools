@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 #include <vector>
 
-#include "cpptools/ct.hpp"
 #include "cpptools/ct_bits/color.hpp"
 
 TEST(ct_test, color_test)

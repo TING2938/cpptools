@@ -4,7 +4,7 @@
 
 TEST(ct_test, progressbar_test)
 {
-    int N = 100;
+    int N = 10;
     ct::ProgressBar bar(N, std::chrono::seconds(1));
     bar.style = ct::ProgressBar::Style::BB;
 
