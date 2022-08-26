@@ -197,6 +197,24 @@ inline T prod(const T (&vec)[N])
     return std::accumulate(std::begin(vec), std::end(vec), T(1), std::multiplies<T>());
 }
 
+template <typename _InputIterator, typename _Tp>
+inline bool contain(_InputIterator __first, _InputIterator __last, const _Tp& __val)
+{
+    return std::find(__first, __last, __val) != __last;
+}
+
+template <typename T>
+inline bool contain(const std::vector<T>& vec, const T& __val)
+{
+    return ct::contain(vec.begin(), vec.end(), __val);
+}
+
+template <typename T, int N>
+inline bool contain(const T (&vec)[N], const T& __val)
+{
+    return ct::contain(std::begin(vec), std::end(vec), __val);
+}
+
 /**
  * @brief Clip (limit) the values in an array.
  *

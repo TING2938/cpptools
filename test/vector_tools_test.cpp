@@ -80,6 +80,12 @@ TEST(stdarray, func)
     EXPECT_EQ(ct::argmin(v1), 2);
     EXPECT_DOUBLE_EQ(ct::stddev(v1), 1.247219128924647);
     EXPECT_EQ(ct::prod(v1), 8);
+
+    // contain
+    EXPECT_TRUE(ct::contain(v1, 4));
+    EXPECT_TRUE(ct::contain(v2, 3.0));
+    EXPECT_FALSE(ct::contain(v1, 3));
+    EXPECT_FALSE(ct::contain(v2, 4.3));
 }
 
 TEST(carray, func)
@@ -95,4 +101,10 @@ TEST(carray, func)
     EXPECT_EQ(ct::argmin(v1), 2);
     EXPECT_DOUBLE_EQ(ct::stddev(v1), 1.247219128924647);
     EXPECT_EQ(ct::prod(v1), 8);
+
+    // contain
+    EXPECT_TRUE(ct::contain(v1, 4));
+    EXPECT_TRUE(ct::contain(v2, 3));
+    EXPECT_FALSE(ct::contain(v1, 3));
+    EXPECT_FALSE(ct::contain(v2, 4));
 }
