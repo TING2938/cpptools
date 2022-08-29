@@ -16,3 +16,6 @@ foreach(SRC_PATH ${CT_TEST_SRC_FILES})
     add_executable(${_target} ${SRC_PATH})
     target_link_libraries(${_target} ${CT_TEST_LINKED_LIB})
 endforeach()
+
+CT_USE_PYBIND11()
+target_link_libraries(pybind11_tools_test cpptools::pybind11)
