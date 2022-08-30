@@ -65,6 +65,11 @@ inline double mean(const T (&vec)[N])
     return ct::mean(vec, vec + N);
 }
 
+template <typename _InputIterator>
+inline auto max(_InputIterator __first, _InputIterator __last) -> typename std::decay<decltype(*__first)>::type
+{
+    return *std::max_element(__first, __last);
+}
 /**
  * @brief the max value of `vec`
  *
@@ -84,6 +89,13 @@ inline T max(const T (&vec)[N])
     return *std::max_element(std::begin(vec), std::end(vec));
 }
 
+
+template <typename _InputIterator>
+inline std::ptrdiff_t argmax(_InputIterator __first, _InputIterator __last)
+{
+    return std::max_element(__first, __last) - __first;
+}
+
 /**
  * @brief the max position of `vec`
  *
@@ -94,13 +106,19 @@ inline T max(const T (&vec)[N])
 template <typename T>
 inline std::ptrdiff_t argmax(const std::vector<T>& vec)
 {
-    return std::max_element(vec.begin(), vec.end()) - vec.begin();
+    return ct::argmax(vec.begin(), vec.end());
 }
 
 template <typename T, int N>
 inline std::ptrdiff_t argmax(const T (&vec)[N])
 {
-    return std::max_element(std::begin(vec), std::end(vec)) - std::begin(vec);
+    return ct::argmax(std::begin(vec), std::end(vec));
+}
+
+template <typename _InputIterator>
+inline auto min(_InputIterator __first, _InputIterator __last) -> typename std::decay<decltype(*__first)>::type
+{
+    return *std::min_element(__first, __last);
 }
 
 /**
@@ -120,6 +138,12 @@ template <typename T, int N>
 inline T min(const T (&vec)[N])
 {
     return *std::min_element(std::begin(vec), std::end(vec));
+}
+
+template <typename _InputIterator>
+inline std::ptrdiff_t argmin(_InputIterator __first, _InputIterator __last)
+{
+    return std::min_element(__first, __last) - __first;
 }
 
 /**

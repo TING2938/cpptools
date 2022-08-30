@@ -75,8 +75,12 @@ TEST(stdarray, func)
     EXPECT_DOUBLE_EQ(ct::mean(v1), 7 / 3.0);
     EXPECT_EQ(ct::max(v1), 4);
     EXPECT_EQ(ct::min(v1), 1);
+    EXPECT_EQ(ct::max(v1.begin(), v1.end()), 4);
+    EXPECT_EQ(ct::min(v1.begin(), v1.end()), 1);
     EXPECT_EQ(ct::argmax(v1), 1);
     EXPECT_EQ(ct::argmin(v1), 2);
+    EXPECT_EQ(ct::argmax(v1.begin(), v1.end()), 1);
+    EXPECT_EQ(ct::argmin(v1.begin(), v1.end()), 2);
     EXPECT_DOUBLE_EQ(ct::stddev(v1), 1.247219128924647);
     EXPECT_EQ(ct::prod(v1), 8);
 
@@ -96,8 +100,12 @@ TEST(carray, func)
     EXPECT_DOUBLE_EQ(ct::mean(v1), 7 / 3.0);
     EXPECT_EQ(ct::max(v1), 4);
     EXPECT_EQ(ct::min(v1), 1);
+    EXPECT_EQ(ct::max(std::begin(v1), std::end(v1)), 4);
+    EXPECT_EQ(ct::min(std::begin(v1), std::end(v1)), 1);
     EXPECT_EQ(ct::argmax(v1), 1);
     EXPECT_EQ(ct::argmin(v1), 2);
+    EXPECT_EQ(ct::argmax(std::begin(v1), std::end(v1)), 1);
+    EXPECT_EQ(ct::argmin(std::begin(v1), std::end(v1)), 2);
     EXPECT_DOUBLE_EQ(ct::stddev(v1), 1.247219128924647);
     EXPECT_EQ(ct::prod(v1), 8);
 
