@@ -22,3 +22,15 @@ TEST(ct_test, pickler_test)
         py::print("tuple1: ", tuple1, ", tuple2: ", tuple2);
     }
 }
+
+TEST(ct_test, subplots_test)
+{
+    py::scoped_interpreter guard;
+    auto plt         = py::module_::import("matplotlib.pyplot");
+    auto&& [fig, ax] = ct::subplots(2, 1, "figsize"_a = py::make_tuple(10, 8));
+
+    std::vector<int> y = {2, 4, 3};
+    ax[0].attr("plot")(y, "--o");
+    ax[1].attr("plot")(y, ":o");
+    plt.attr("show")();
+}
