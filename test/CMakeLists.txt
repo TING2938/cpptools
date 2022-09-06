@@ -19,3 +19,5 @@ endforeach()
 
 CT_USE_PYBIND11()
 target_link_libraries(pybind11_tools_test cpptools::pybind11)
+
+pybind11_add_module(pybind11_lib pybind11_lib.cc)
