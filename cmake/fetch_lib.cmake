@@ -1,11 +1,19 @@
 
 include(FetchContent)
 
+# URL can be a file or dir
+set(CT_FMT_URL https://github.com/fmtlib/fmt/releases/download/8.1.1/fmt-8.1.1.zip CACHE STRING "")
+set(CT_SPDLOG_URL https://github.com/gabime/spdlog/archive/refs/tags/v1.10.0.tar.gz CACHE STRING "")
+set(CT_EIGEN_URL https://github.com/TING2938/eigen-mirror/archive/refs/tags/3.4.0.tar.gz CACHE STRING "")
+set(CT_PYBIND11_URL https://github.com/pybind/pybind11/archive/refs/tags/v2.10.0.tar.gz CACHE STRING "")
+set(CT_JSON_URL https://github.com/nlohmann/json/releases/download/v3.11.1/json.tar.xz CACHE STRING "")
+set(CT_GTEST_URL https://github.com/google/googletest/archive/refs/tags/release-1.12.1.tar.gz CACHE STRING "")
+
 if(NOT TARGET fmt::fmt-header-only)
-    message(STATUS "cpptools fetch lib fmt")
+    message(STATUS "cpptools fetch lib fmt")    
     FetchContent_Declare(
         tag_fmt
-        URL https://github.com/fmtlib/fmt/releases/download/8.1.1/fmt-8.1.1.zip
+        URL ${CT_FMT_URL}
     )
     FetchContent_MakeAvailable(tag_fmt)
 endif()
@@ -22,7 +30,7 @@ macro(CT_USE_SPDLOG)
             endif()
             FetchContent_Declare(
                 tag_spdlog
-                URL https://github.com/gabime/spdlog/archive/refs/tags/v1.10.0.tar.gz
+                URL ${CT_SPDLOG_URL}
             )
             FetchContent_MakeAvailable(tag_spdlog)
         endif()
@@ -41,7 +49,7 @@ macro(CT_USE_EIGEN)
             set(EIGEN_BUILD_PKGCONFIG OFF CACHE BOOL "")
             FetchContent_Declare(
                 tag_eigen
-                URL https://github.com/TING2938/eigen-mirror/archive/refs/tags/3.4.0.tar.gz
+                URL ${CT_EIGEN_URL}
             )
             FetchContent_MakeAvailable(tag_eigen)
         endif()
@@ -57,7 +65,7 @@ macro(CT_USE_PYBIND11)
             message(STATUS "cpptools fetch lib pybind11")
             FetchContent_Declare(
                 tag_pybind11
-                URL https://github.com/pybind/pybind11/archive/refs/tags/v2.10.0.tar.gz
+                URL ${CT_PYBIND11_URL}
             )
             FetchContent_MakeAvailable(tag_pybind11)
         endif()
@@ -75,7 +83,7 @@ macro(CT_USE_JSON)
             set(JSON_Install OFF CACHE INTERNAL "")
             FetchContent_Declare(
                 tag_json
-                URL https://github.com/nlohmann/json/releases/download/v3.11.1/json.tar.xz
+                URL ${CT_JSON_URL}
             )
             FetchContent_MakeAvailable(tag_json)
         endif()
@@ -94,7 +102,7 @@ macro(CT_USE_GTEST)
             set(BUILD_GTEST ON CACHE BOOL "" FORCE)
             FetchContent_Declare(
                 tag_gtest
-                URL https://github.com/google/googletest/archive/refs/tags/release-1.12.1.tar.gz
+                URL ${CT_GTEST_URL}
             )
             FetchContent_MakeAvailable(tag_gtest)
         endif()
