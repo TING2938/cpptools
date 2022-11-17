@@ -24,7 +24,6 @@ add_library(cpptools::ct ALIAS ct_ct)
 include(${CMAKE_CURRENT_LIST_DIR}/cmake/fetch_lib.cmake)
 
 target_include_directories(ct_ct INTERFACE ${CMAKE_CURRENT_LIST_DIR}/include)
-target_link_libraries(ct_ct INTERFACE cpptools::fmt)
 
 if(CPPTOOLS_MASTER_PROJECT)
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/test)

@@ -5,7 +5,8 @@ CT_USE_GTEST()
 CT_USE_GITINFO()
 
 set(CT_TEST_LINKED_LIB 
-        cpptools::ct 
+        cpptools::ct
+        cpptools::fmt 
         cpptools::gtest 
         cpptools::gitinfo 
         cpptools::eigen
