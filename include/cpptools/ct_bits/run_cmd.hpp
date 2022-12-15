@@ -6,7 +6,7 @@
 
 namespace ct
 {
-std::string run_cmd(const std::string& cmd)
+inline std::string run_cmd(const std::string& cmd)
 {
     char buffer[1024] = {0};
     FILE* fp;
