@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <list>
 #include <queue>
 
@@ -9,6 +10,25 @@ namespace ct
 namespace ns_filter
 {
 
+template <typename T>
+class Basic_Filter
+{
+public:
+    virtual ~Basic_Filter() {}
+
+    virtual T apply(const T& raw) = 0;
+
+    virtual void clear() = 0;
+
+    T last_value() const
+    {
+        return _last_flt_value;
+    }
+
+protected:
+    T _last_flt_value;
+};
+
 /**
  * @brief Simple Moving Average, SMA
  *  y_{i} = (\sum_{j=i-n+1}^{i} x_{i}) / n
@@ -16,30 +36,38 @@ namespace ns_filter
  * @tparam M
  */
 template <typename T, int M>
-class SMA
+class SMA : public Basic_Filter<T>
 {
 public:
     static_assert(M > 1, "SMA require window width>1");
 
-    SMA() : _last_flt_value{0} {};
-    ~SMA(){};
-    T apply(const T& raw)
+    SMA()
+    {
+        this->_last_flt_value = 0;
+    }
+
+    T apply(const T& raw) override
     {
         _queue.push(raw);
 
         if (_queue.size() > M) {
-            _last_flt_value += ((raw - _queue.front()) / M);
+            this->_last_flt_value += ((raw - _queue.front()) / M);
             _queue.pop();
         } else {
-            _last_flt_value = (_last_flt_value * (_queue.size() - 1) + raw) / _queue.size();
+            this->_last_flt_value = (this->_last_flt_value * (_queue.size() - 1) + raw) / _queue.size();
         }
 
-        return _last_flt_value;
+        return this->_last_flt_value;
+    }
+
+    void clear() override
+    {
+        this->_last_flt_value = 0;
+        decltype(_queue){}.swap(_queue);
     }
 
 private:
     std::queue<T> _queue;
-    T _last_flt_value{0};
 };
 
 /**
@@ -47,14 +75,17 @@ private:
  * y_{i} = (nx_i + (n-1)x_{i-1} + ... + x_{i-n+1}) / (n + (n-1) + ... + 1)
  */
 template <typename T, int M>
-class WMA
+class WMA : public Basic_Filter<T>
 {
 public:
     static_assert(M > 1, "WMA require window width>1");
 
-    WMA(){};
-    ~WMA(){};
-    T apply(const T& raw)
+    WMA()
+    {
+        this->_last_flt_value = 0;
+    }
+
+    T apply(const T& raw) override
     {
         _ls.push_back(raw);
 
@@ -71,7 +102,14 @@ public:
             ++w;
         }
 
-        return sum / den;
+        this->_last_flt_value = sum / den;
+        return this->_last_flt_value;
+    }
+
+    void clear() override
+    {
+        this->_last_flt_value = 0;
+        _ls.clear();
     }
 
 private:
@@ -83,30 +121,41 @@ private:
  *    y_{i} = (1 - alpha)y_{i-1} + alpha * x_{i}
  */
 template <typename T>
-class EMA
+class EMA : public Basic_Filter<T>
 {
 public:
     EMA() = delete;
-    EMA(double alpha)
+
+    EMA(double alpha) : _alpha(alpha), _initlized(false)
+    {
+        this->_last_flt_value = 0;
+    }
+
+    T apply(const T& raw) override
+    {
+        if (!_initlized) {
+            this->_last_flt_value = raw;
+            _initlized            = true;
+        } else {
+            this->_last_flt_value = _alpha * this->_last_flt_value + (1 - _alpha) * raw;
+        }
+        return this->_last_flt_value;
+    }
+
+    void clear() override
+    {
+        _initlized            = false;
+        this->_last_flt_value = 0;
+    }
+
+    void set_alpha(double alpha)
     {
         _alpha = alpha;
-    };
-    ~EMA(){};
-    T apply(const T& raw)
-    {
-        if (_initlized == false) {
-            _last_y    = raw;
-            _initlized = true;
-        } else {
-            _last_y = _alpha * _last_y + (1 - _alpha) * raw;
-        }
-        return _last_y;
     }
 
 private:
-    T _last_y;
-    double _alpha   = 0.1f;
-    bool _initlized = false;
+    double _alpha;
+    bool _initlized;
 };
 }  // namespace ns_filter
 }  // namespace ct
