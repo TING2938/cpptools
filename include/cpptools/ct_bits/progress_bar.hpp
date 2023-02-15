@@ -5,8 +5,8 @@
 #include <chrono>
 #include <ctime>
 #include <functional>
+#include <limits>
 #include <string>
-using namespace std::literals;
 
 #include "color.hpp"
 #include "timer.hpp"
@@ -141,7 +141,7 @@ private:
             // 剩余时间的估计是用这次的速度和未完成的数量进行估计
             timeLast = int((this->totalNum - tmpFinished) / rate);
         } else {
-            timeLast = INT_MAX;
+            timeLast = std::numeric_limits<int>::max();
         }
         if ((this->totalNum - tmpFinished) == 0) {
             timeLast = 0;
@@ -149,8 +149,8 @@ private:
         tfs = timeLast;
         std::strftime(mbstr2, sizeof(mbstr2), "%X", gmtime(&tfs));
 
-        fmt::print(stderr, "{}{:.1f}%|{:"s + sign + ">{}}{:>{}}{:.1f}MHz|{}|{}{}", color::green, present, '>', barWidth,
-                   '|', this->ncols - barWidth, rate / 1000, mbstr1, mbstr2, color::reset);
+        fmt::print(stderr, std::string("{}{:.1f}%|{:") + sign + ">{}}{:>{}}{:.1f}MHz|{}|{}{}", color::green, present,
+                   '>', barWidth, '|', this->ncols - barWidth, rate / 1000, mbstr1, mbstr2, color::reset);
     }
 
     void style_BB(double present)

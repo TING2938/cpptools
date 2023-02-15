@@ -1,15 +1,13 @@
-
-CT_USE_FMT()
-CT_USE_EIGEN()
-CT_USE_GTEST()
+include(fetch_lib)
 CT_USE_GITINFO()
 
 set(CT_TEST_LINKED_LIB 
         cpptools::ct
-        cpptools::fmt 
-        cpptools::gtest 
+        fmt::fmt 
+        gtest
+        gtest_main 
         cpptools::gitinfo 
-        cpptools::eigen
+        Eigen3::Eigen
 )
 
 file(GLOB CT_TEST_SRC_FILES *.cpp)
@@ -19,7 +17,6 @@ foreach(SRC_PATH ${CT_TEST_SRC_FILES})
     target_link_libraries(${_target} ${CT_TEST_LINKED_LIB})
 endforeach()
 
-CT_USE_PYBIND11()
-target_link_libraries(pybind11_tools_test cpptools::pybind11)
+target_link_libraries(pybind11_tools_test pybind11::embed)
 
 pybind11_add_module(pybind11_lib pybind11_lib.cc)

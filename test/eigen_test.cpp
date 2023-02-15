@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
-#include <vector>
-#include "cpptools/ct.hpp"
-
 #include <Eigen/Dense>
+#include <cpptools/ct_bits/fmt_formatter.hpp>
+#include <vector>
+
 using namespace Eigen;
 
 TEST(ct_test, seq_test)
