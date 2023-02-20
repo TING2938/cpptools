@@ -47,24 +47,12 @@ add_library(git_info INTERFACE)
 message(STATUS "GIT_BRANCH: ${GIT_BRANCH}")
 message(STATUS "GIT_TAG: ${GIT_TAG}")
 message(STATUS "GIT_COMMIT_HASH: ${GIT_COMMIT_HASH}")
-target_compile_definitions(git_info INTERFACE "-DGIT_BRANCH=\"${GIT_BRANCH}\"")
-target_compile_definitions(git_info INTERFACE "-DGIT_TAG=\"${GIT_TAG}\"")
-target_compile_definitions(git_info INTERFACE "-DGIT_COMMIT_HASH=\"${GIT_COMMIT_HASH}\"")
+target_compile_definitions(git_info INTERFACE -DGIT_BRANCH="${GIT_BRANCH}")
+target_compile_definitions(git_info INTERFACE -DGIT_TAG="${GIT_TAG}")
+target_compile_definitions(git_info INTERFACE -DGIT_COMMIT_HASH="${GIT_COMMIT_HASH}")
 if(GIT_DIRTY)
-    target_compile_definitions(git_info INTERFACE "-DGIT_DIRTY=1")
+    target_compile_definitions(git_info INTERFACE -DGIT_DIRTY=1)
     message(WARNING "the git working dir is dirty !!!")
 else()
-    target_compile_definitions(git_info INTERFACE "-DGIT_DIRTY=0")
+    target_compile_definitions(git_info INTERFACE -DGIT_DIRTY=0)
 endif(GIT_DIRTY)
-
-# add_compile_definitions("GIT_COMMIT_HASH=\"${GIT_COMMIT_HASH}\"")
-# add_compile_definitions("GIT_BRANCH=\"${GIT_BRANCH}\"")
-# add define in cmake
-# target_compile_definitions(${PROJECT_NAME} PRIVATE
-#     "-DGIT_COMMIT_HASH=\"${GIT_COMMIT_HASH}\"")
-# 
-# and then in c++ file:
-# #ifndef GIT_COMMIT_HASH
-# #define GIT_COMMIT_HASH "?"
-# #endif
-#
