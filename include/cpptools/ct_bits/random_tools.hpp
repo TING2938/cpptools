@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <ctime>
 #include "vector_tools.hpp"
 
 namespace ct
