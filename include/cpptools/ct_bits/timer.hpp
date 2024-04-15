@@ -79,7 +79,7 @@ public:
     void setTimeout(int delay, _Fn&& func)
     {
         active = true;
-        std::thread t([=]() {
+        std::thread t([=, this]() {
             if (!active.load())
                 return;
             std::this_thread::sleep_for(std::chrono::milliseconds(delay));
@@ -101,7 +101,7 @@ public:
     void setInterval(int interval, _Fn&& func)
     {
         active = true;
-        std::thread t([=]() {
+        std::thread t([=, this]() {
             while (active.load()) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(interval));
                 if (!active.load())

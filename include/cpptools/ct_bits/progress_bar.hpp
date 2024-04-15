@@ -149,8 +149,9 @@ private:
         tfs = timeLast;
         std::strftime(mbstr2, sizeof(mbstr2), "%X", gmtime(&tfs));
 
-        fmt::print(stderr, std::string("{}{:.1f}%|{:") + sign + ">{}}{:>{}}{:.1f}MHz|{}|{}{}", color::green, present,
-                   '>', barWidth, '|', this->ncols - barWidth, rate / 1000, mbstr1, mbstr2, color::reset);
+        fmt::print(stderr, fmt::runtime(std::string("{}{:.1f}%|{:") + sign + ">{}}{:>{}}{:.1f}MHz|{}|{}{}"),
+                   color::green, present, '>', barWidth, '|', this->ncols - barWidth, rate / 1000, mbstr1, mbstr2,
+                   color::reset);
     }
 
     void style_BB(double present)

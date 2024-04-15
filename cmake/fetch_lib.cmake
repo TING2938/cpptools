@@ -3,7 +3,7 @@ include(FetchContent)
 # fmt
 FetchContent_Declare(
     fmt
-    URL https://github.com/fmtlib/fmt/releases/download/8.1.1/fmt-8.1.1.zip
+    URL https://github.com/fmtlib/fmt/archive/refs/tags/10.2.1.tar.gz
 )
 FetchContent_MakeAvailable(fmt)
 
@@ -20,7 +20,7 @@ FetchContent_MakeAvailable(eigen)
 # pybind11
 FetchContent_Declare(
     pybind11
-    URL https://github.com/pybind/pybind11/archive/refs/tags/v2.10.0.tar.gz
+    URL https://github.com/pybind/pybind11/archive/refs/tags/v2.12.0.tar.gz
 )
 FetchContent_MakeAvailable(pybind11)
 
