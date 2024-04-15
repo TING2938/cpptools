@@ -21,6 +21,7 @@ set(CT_LIST_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE STRING "" FORCE)
 message(STATUS "CT_LIST_DIR: ${CT_LIST_DIR}")
 
 include(cpptools_macro)
+include(asan)
 
 add_library(ct_ct INTERFACE)
 add_library(cpptools::ct ALIAS ct_ct)

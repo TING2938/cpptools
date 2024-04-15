@@ -1,7 +1,8 @@
 include(fetch_lib)
 CT_USE_GITINFO()
 
-set(CT_TEST_LINKED_LIB 
+set(CT_TEST_LINKED_LIB
+        cpptools::asan
         cpptools::ct
         fmt::fmt 
         gtest
